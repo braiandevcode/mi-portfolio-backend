@@ -29,6 +29,8 @@ export const getFocusInfo = async (req, res) => {
       result: resultsWithImageUrls,
     });
   } catch (error) {
+    console.log(error);
+    
     return res.status(500).json({
       success: false,
       message: "No eres tú, soy yo. Intente más tarde.",
