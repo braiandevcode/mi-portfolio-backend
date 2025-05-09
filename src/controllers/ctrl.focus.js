@@ -1,4 +1,4 @@
-import { getInfoFocusModel} from "../models/model/model.focus.js";
+import { getInfoFocusModel} from "../model/model.focus.js";
 
 export const getFocusInfo = async (req, res) => {
   try {

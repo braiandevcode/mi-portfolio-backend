@@ -1,4 +1,4 @@
-import DB_CONNECTION from "../../config/db.config.js";
+import DB_CONNECTION from "../config/db.config.js";
 
 export const getInfoTrajectoryeModel = async () => {
     const conn = await DB_CONNECTION.getConnection();
