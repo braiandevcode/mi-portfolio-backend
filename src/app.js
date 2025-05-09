@@ -12,6 +12,7 @@ import { routeProjects } from "./routes/route.project.js";
 import { routeStudies } from "./routes/route.studies.js";
 import { routeTrajectory } from "./routes/route.trajectory.js";
 import routerContact from "./routes/route.contact.js";
+import DB_CONNECTION from "./config/db.config.js";
 dotenv.config(); //USAMOS CONFIGURACION DE DOTENV PARA LEER VARIABLES DE ENTORNO
 
 const __filename = fileURLToPath(import.meta.url);
@@ -58,6 +59,17 @@ app.use(
   "/uploads",
   express.static(join(__dirname, "images", "uploads"))
 );
+
+
+setInterval(async () => {
+  try {
+    const [rows] = await DB_CONNECTION.query('SELECT 1');
+    console.log('Ping exitoso');
+  } catch (err) {
+    console.error('Ping falló', err);
+  }
+}, 300000);
+
 
 //**USO DE RUTAS***//
 app.use("/api/data", routeSkills);
