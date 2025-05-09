@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getSkills } from '../controllers-pg/ctrl.skill.js';
 const route = Router();
+import { getSkills } from '../controllers/ctrl.skill.js';
 
 export const routeSkills = route.get('/skills', getSkills);

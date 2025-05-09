@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { getStudiesModel } from '../models/model-pg/model.studies.js';
+import { getStudies } from '../controllers/ctrl.studies.js';
 const route = Router();
 
-export const routeStudies = route.get('/studies', getStudiesModel);
+export const routeStudies = route.get('/studies', getStudies);
