@@ -22,7 +22,7 @@ const app = express();
 
 // *******SETTINGS*********//
 // EJEMPLO DE CONFIGURACION
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 3000;
 const MESSAGE = `${process.env.MESSAGE_CONNECTION_SERVER} ${PORT}`;
 app.set("port", PORT);
 app.set("message_server", MESSAGE);
@@ -42,6 +42,12 @@ app.use(
     credentials: true,
   })
 );
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", `${process.env.ORIGIN}`);
+  res.header("Access-Control-Allow-Methods", "GET, POST");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
 
 // PARA MODO DESARROLLO VER LOS RESULTADOS D ELOS PROTOCOLO DE CONSULTA.
 app.use(morgan("dev"));
