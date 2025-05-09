@@ -42,6 +42,12 @@ app.use(
     credentials: true,
   })
 );
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://mi-portfolio-cv.netlify.app");
+  res.header("Access-Control-Allow-Methods", "GET, POST");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
 
 // PARA MODO DESARROLLO VER LOS RESULTADOS D ELOS PROTOCOLO DE CONSULTA.
 app.use(morgan("dev"));
