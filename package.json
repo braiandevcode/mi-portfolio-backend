@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "babel src --out-dir dist",
+    "build": "babel src --out-dir dist && mkdir -p dist/images && cp -r src/images/* dist/images/",
     "start": "npm run build && node dist/app.js",
     "dev": "nodemon src/app.js"
   },
