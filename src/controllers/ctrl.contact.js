@@ -1,5 +1,7 @@
 import { Resend } from "resend";
 import { addNewMessageContactModel } from "../model/model.contact.js";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -18,7 +20,7 @@ export const addNewMessageContact = async (req, res) => {
     // 1. Enviar al administrador
     const adminEmailResult = await resend.emails.send({
       from: "Formulario Web <onboarding@resend.dev>",
-      to: "braianpalacios699@gmail.com",
+      to:`${process.env.MY_EMAIL}`,
       reply_to: emailContact, // 👈 Por si quiero contactar con el usuario
       subject: `Nuevo mensaje de contacto: ${subjectContact}`,
       html: `
@@ -48,7 +50,7 @@ export const addNewMessageContact = async (req, res) => {
         <p>He recibido tu mensaje con el asunto: <strong>${subjectContact}</strong>.</p>
         <p>Me pondré en contacto contigo pronto.</p>
         <br>
-        <p>Atentamente,<br>Braian Palacios</p>
+        <p>Atentamente,<br>${process.env.MY_NAME}</p>
         <br>
         <p>Visita nuestra página web: <a href=${process.env.ORIGIN}>Mi-portfolio-cv</a></p>
 
