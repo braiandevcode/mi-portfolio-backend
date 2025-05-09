@@ -3,5 +3,8 @@ node_modules
 Dockerfile*
 Dockerfile.dev
 .env
+dist
 docker-compose.dev.yml
 docker-compose.yml
+*.d.ts
+gulpfile.js
