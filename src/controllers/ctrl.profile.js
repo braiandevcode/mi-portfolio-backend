@@ -1,4 +1,4 @@
-import { getInfoProfileModel } from "../model/model.profile.js";
+import { getInfoProfileModel } from "../models/model/model.profile.js";
 
 export const getProfileInfo = async (req, res) => {
   try {

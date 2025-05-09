@@ -1,4 +1,4 @@
-import DB_CONNECTION from "../config/db.config.js";
+import DB_CONNECTION from "../../config/db.config.js";
 
 // NUEVO MENSAJE DE CONTACTO
 export const addNewMessageContactModel = async ({nameContact, emailContact, subjectContact, message}) => {

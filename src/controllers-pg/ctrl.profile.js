@@ -1,20 +1,20 @@
-import { getInfoFocusModel} from "../models/model/model.focus.js";
+import { getInfoProfileModel } from "../models/model-pg/model.profile.js";
 
-export const getFocusInfo = async (req, res) => {
+export const getProfileInfo = async (req, res) => {
   try {
     // LLAMAMOS AL MODELO
-    const resultsFocusModel = await getInfoFocusModel();
+    const resultsProfileModel = await getInfoProfileModel();
 
     // SI EL CONTADOR NO ES MAYOR A CERO NO HAY REGISTROS Y NO INICIAR TRANSACCION
-    if (resultsFocusModel === null) {
+    if (!resultsProfileModel || resultsProfileModel.length == 0) {
       return res.status(200).json({
         success: false,
-        message: "No se encontraron registros en foco actual.",
+        message: "No se encontraron registros en perfil.",
         result: null,
       });
     }
     // Si hay registros, procesamos la ruta de la imagen
-    const resultsWithImageUrls = resultsFocusModel.map((record) => {
+    const resultsWithImageUrls = resultsProfileModel.map((record) => {
       const imageUrl = `/uploads/${record.file_name}`;
       return {
         ...record,

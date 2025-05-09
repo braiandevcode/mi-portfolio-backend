@@ -1,10 +1,10 @@
-import DB_CONNECTION from "../config/db.config.js";
+import DB_CONNECTION from "../../config/db.config.js";
 
-export const getInfoProfileModel = async () => {
+export const getInfoFocusModel = async () => {
     const conn = await DB_CONNECTION.getConnection();
 
     try {
-        const [rows] = await conn.query('SELECT COUNT(*) AS contador FROM profile_info');
+        const [rows] = await conn.query('SELECT COUNT(*) AS contador FROM current_focus');
         const contador = rows[0].contador;
 
         if (contador <= 0) {
@@ -14,8 +14,10 @@ export const getInfoProfileModel = async () => {
 
         await conn.beginTransaction();
 
-        const [results] = await conn.query('SELECT * FROM profile_info');
-        console.log("Se leyo!!", results)
+        const [results] = await conn.query('SELECT * FROM current_focus');
+
+        console.log(results)
+
         await conn.commit();
         conn.release();
 

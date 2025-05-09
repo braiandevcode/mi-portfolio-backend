@@ -1,4 +1,4 @@
-import { getInfoFocusModel} from "../models/model/model.focus.js";
+import { getInfoFocusModel } from "../models/model-pg/model.focus.js";
 
 export const getFocusInfo = async (req, res) => {
   try {
@@ -6,7 +6,7 @@ export const getFocusInfo = async (req, res) => {
     const resultsFocusModel = await getInfoFocusModel();
 
     // SI EL CONTADOR NO ES MAYOR A CERO NO HAY REGISTROS Y NO INICIAR TRANSACCION
-    if (resultsFocusModel === null) {
+    if (!resultsFocusModel || resultsFocusModel.length == 0) {
       return res.status(200).json({
         success: false,
         message: "No se encontraron registros en foco actual.",
