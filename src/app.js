@@ -31,7 +31,7 @@ app.set("message_server", MESSAGE);
 // HELMET
 app.use(
   helmet({
-    crossOriginResourcePolicy: { policy: "cross-origin" }
+    crossOriginResourcePolicy: { policy: "cross-origin" },
   })
 );
 
@@ -40,24 +40,17 @@ app.use(
   cors({
     origin: process.env.ORIGIN,
     credentials: true,
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", `${process.env.ORIGIN}`);
-  res.header("Access-Control-Allow-Methods", "GET, POST");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
 
 // PARA MODO DESARROLLO VER LOS RESULTADOS D ELOS PROTOCOLO DE CONSULTA.
 app.use(morgan("dev"));
 app.use(express.json());
 // urlencoded({ extended: false })) => usa la librería querystring, que no admite objetos complejos, solo planos.
-app.use(urlencoded({ extended: true })) // permite que el cuerpo del formulario contenga objetos anidados, usando la librería qs
-app.use(
-  "/uploads",
-  express.static(join(__dirname, "images", "uploads"))
-);
+app.use(urlencoded({ extended: true })); // permite que el cuerpo del formulario contenga objetos anidados, usando la librería qs
+app.use("/uploads", express.static(join(__dirname, "images", "uploads")));
 
 //**USO DE RUTAS***//
 app.use("/api/data", routeSkills);
