@@ -16,8 +16,6 @@ export const getInfoFocusModel = async () => {
 
         const [results] = await conn.query('SELECT * FROM current_focus');
 
-        console.log(results)
-
         await conn.commit();
         conn.release();
 

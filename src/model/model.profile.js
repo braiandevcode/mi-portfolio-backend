@@ -15,7 +15,6 @@ export const getInfoProfileModel = async () => {
         await conn.beginTransaction();
 
         const [results] = await conn.query('SELECT * FROM profile_info');
-        console.log("Se leyo!!", results)
         await conn.commit();
         conn.release();
 
