@@ -4,7 +4,6 @@ Dockerfile*
 Dockerfile.dev
 .env
 .env.dev
-dist
 docker-compose.dev.yml
 docker-compose.yml
 *.d.ts
