@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "build": "npx esbuild src/*.js --bundle --minify --outdir=dist",
+    "build": "npx esbuild src/*.js --bundle --minify --outdir=dist --format=cjs --platform=node",
     "start": "npm run build && node dist/app.js",
     "dev": "nodemon src/app.js"
   },
