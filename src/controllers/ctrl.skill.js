@@ -28,25 +28,32 @@ export const getSkills = async (req, res) => {
         // LLAMAMOS AL MODELO
         const resultsSkillModel = await getSkillModel();
         
-        // SI EL CONTADOR NO ES MAYOR A CERO NO HAY REGISTROS Y NO INICIAR TRANSACCION
+        // SI EL CONTADOR NO ES MAYOR A CERO NO HAY REGISTROS
         if (resultsSkillModel === null) {
-            return res.status(200).json({ 
-                success: false, 
-                message: 'No se encontraron registros.',
-                result:null
-            });
-        };
-        // SINO
+            return res.status(204).send(); // Devuelve un 204 sin cuerpo si no hay datos
+        }
+        
+        // SI HAY REGISTROS
         return res.status(200).json({ 
             success: true, 
             message: 'Ok',
-            result:resultsSkillModel
+            result: resultsSkillModel
         });
     } catch (error) {
-        return res.status(500).json({ 
-            success: false, 
+        // Detectar error temporal para devolver 503
+        if (error.code === 'ECONNREFUSED' || error.message.includes('timeout')) {
+            return res.status(503).json({
+                success: false,
+                message: 'El servicio está temporalmente inactivo. Intente nuevamente en unos momentos.',
+                result: null
+            });
+        }
+
+        // Error general de servidor
+        return res.status(500).json({
+            success: false,
             message: 'No eres tú, soy yo. Intente más tarde.',
-            result:null
+            result: null
         });
     }
 }

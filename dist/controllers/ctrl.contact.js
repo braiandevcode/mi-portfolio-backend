@@ -55,7 +55,6 @@ export const addNewMessageContact = async (req, res) => {
         <p>Atentamente,<br>${process.env.MY_NAME}</p>
         <br>
         <p>Visita nuestra página web: <a href=${process.env.ORIGIN}>Mi-portfolio-cv</a></p>
-
       `
     });
 
@@ -70,6 +69,9 @@ export const addNewMessageContact = async (req, res) => {
     // 4. Evaluar resultados
     const dbSaved = result.affectedRows > 0;
     const emailConfirmationSent = !confirmEmailResult.error;
+    if (dbSaved === false) {
+      return res.status(204).send(); // No hay datos guardados
+    }
     return res.status(201).json({
       success: dbSaved,
       message: dbSaved ? emailConfirmationSent ? "Mensaje enviado y registrado con éxito." : "Mensaje registrado, pero no se pudo enviar la confirmación al usuario." : "No se pudo guardar el mensaje.",
@@ -79,6 +81,16 @@ export const addNewMessageContact = async (req, res) => {
       }
     });
   } catch (error) {
+    // Error temporal del servidor (ej. problemas de conexión, timeouts)
+    if (error.code === 'ECONNREFUSED' || error.message.includes('timeout')) {
+      return res.status(503).json({
+        success: false,
+        message: "El servicio está temporalmente inactivo. Intente nuevamente en unos momentos.",
+        result: null
+      });
+    }
+
+    // Error general de servidor
     return res.status(500).json({
       success: false,
       message: "No eres tú, soy yo. Intente más tarde.",
