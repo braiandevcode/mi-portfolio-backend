@@ -4,6 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "minify":"npx esbuild src/app.js --bundle --platform=node --format=esm --minify --outfile=dist/app.min.js",
     "build":"babel src --out-dir dist && mkdir -p dist/images && cp -r src/images/* dist/images/",
     "start":"NODE_ENV=production dist/app.min.js",
     "dev": "nodemon NODE_ENV=development src/app.js"
