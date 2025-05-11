@@ -1,3 +1,6 @@
+const mode = process.env.NODE_ENV || 'development'
+const envFile = `.env.${mode}`;
+dotenv.config({ path: `${envFile}`}); //USAMOS CONFIGURACION DE DOTENV PARA LEER VARIABLES DE ENTORNO
 import express, { urlencoded } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -12,8 +15,8 @@ import { routeProjects } from "./routes/route.project.js";
 import { routeStudies } from "./routes/route.studies.js";
 import { routeTrajectory } from "./routes/route.trajectory.js";
 import routerContact from "./routes/route.contact.js";
-import DB_CONNECTION from "./config/db.config.js";
-dotenv.config(); //USAMOS CONFIGURACION DE DOTENV PARA LEER VARIABLES DE ENTORNO
+import relayConnection from "./model/model.relayConnection.js";
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -61,13 +64,8 @@ app.use(
 );
 
 
-setInterval(async () => {
-  try {
-    const [rows] = await DB_CONNECTION.query('SELECT 1');
-    console.log('Ping exitoso');
-  } catch (err) {
-    console.error('Ping falló', err);
-  }
+setInterval(async ()=>{
+  await relayConnection();
 }, 300000);
 
 

@@ -1,9 +1,8 @@
 import { Resend } from "resend";
 import { addNewMessageContactModel } from "../model/model.contact.js";
-import dotenv from 'dotenv';
-dotenv.config();
+// import dotenv from 'dotenv';
+// dotenv.config();
 
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const addNewMessageContact = async (req, res) => {
   try {
@@ -13,9 +12,10 @@ export const addNewMessageContact = async (req, res) => {
         message: "Error de validación en el formulario.",
         result: req.errors,
       });
-    }
-
+    }    
     const { nameContact, emailContact, subjectContact, message } = req.validatedData;
+    
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     // 1. Enviar al administrador
     const adminEmailResult = await resend.emails.send({

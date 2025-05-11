@@ -2,8 +2,7 @@ node_modules
 .dockerignore
 Dockerfile*
 Dockerfile.dev
-.env
-.env.dev
+.env*
 docker-compose.dev.yml
 docker-compose.yml
 *.d.ts

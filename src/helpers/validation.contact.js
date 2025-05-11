@@ -13,7 +13,7 @@ const temporaryEmailDomains = [
   "emailondeck.com",
 ];
 
-export const contactSchema = z.object({
+const contactSchema = z.object({
   nameContact: z
     .string({ required_error: "El nombre es obligatorio" })
     .min(1, "El nombre no puede estar vacío")
@@ -59,9 +59,6 @@ export function validateContact(req, res, next) {
       },
       {}
     );
-
-    console.log(formattedErrors);
-    
 
     return res.status(400).json({
       success: false,

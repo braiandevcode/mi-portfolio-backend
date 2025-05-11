@@ -1,7 +1,7 @@
 import DB_CONNECTION from "../config/db.config.js";
 
 export const getStudiesModel = async () => {
-    const conn = await DB_CONNECTION.getConnection();
+    const conn = await DB_CONNECTION().getConnection();
 
     try {
         const [rows] = await conn.query('SELECT COUNT(*) AS contador FROM studies');
@@ -9,7 +9,7 @@ export const getStudiesModel = async () => {
 
         if (contador <= 0) {
             conn.release();
-            return null; // 👈 Enviar null
+            return null; 
         }
 
         await conn.beginTransaction();
@@ -19,11 +19,10 @@ export const getStudiesModel = async () => {
         await conn.commit();
         conn.release();
 
-        return results; // 👈 El modelo solo devuelve los datos, no responde al cliente
-
+        return results; 
     } catch (error) {
         await conn.rollback().catch(() => {});
         conn.release();
-        throw error; // 👈 El modelo vuelve a lanzar el error al controlador
+        throw error; 
     }
 };

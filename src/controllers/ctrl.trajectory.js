@@ -17,8 +17,6 @@ export const getTrajectoryInfo = async (req, res) => {
       result: resultsTrajectoryModel,
     });
   } catch (error) {
-    console.log(error);
-
     // Si el error es temporal (ej. problemas de conexión)
     if (error.code === 'ECONNREFUSED' || error.message.includes('timeout')) {
       return res.status(503).json({

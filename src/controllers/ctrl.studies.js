@@ -17,8 +17,6 @@ export const getStudies = async (req, res) => {
       result: resultsStudiesModel
     });
   } catch (error) {
-    console.log(error);
-
     // Si el error es temporal (ej. problemas de conexión)
     if (error.code === 'ECONNREFUSED' || error.message.includes('timeout')) {
       return res.status(503).json({

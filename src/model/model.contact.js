@@ -5,12 +5,12 @@ export const addNewMessageContactModel = async ({nameContact, emailContact, subj
     try {
         const queryContact = 'INSERT INTO contact(name_contact, email_contact, subject_contact, message) VALUES(?, ?, ?, ?)';
 
-        const [results] = await DB_CONNECTION.query(
+        const [results] = await DB_CONNECTION().query(
             queryContact, 
             [nameContact, emailContact, subjectContact,message]
         );
         return results;
     } catch (error) {
-        throw error; // 👈 El modelo vuelve a lanzar el error al controlador
+        throw error; 
     }
 };
