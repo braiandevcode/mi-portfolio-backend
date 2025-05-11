@@ -1,20 +1,20 @@
+import dotenv from "dotenv";
 const mode = process.env.NODE_ENV || 'development'
 const envFile = `.env.${mode}`;
 dotenv.config({ path: `${envFile}`}); //USAMOS CONFIGURACION DE DOTENV PARA LEER VARIABLES DE ENTORNO
 import express, { urlencoded } from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import morgan from "morgan";
-import { routeSkills } from "./routes/route.skill.js";
 import helmet from "helmet";
-import { routeProfile } from "./routes/route.profile.js";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
+import { routeProfile } from "./routes/route.profile.js";
 import { routeFocus } from "./routes/routeFocus.js";
 import { routeProjects } from "./routes/route.project.js";
 import { routeStudies } from "./routes/route.studies.js";
 import { routeTrajectory } from "./routes/route.trajectory.js";
 import routerContact from "./routes/route.contact.js";
+import { routeSkills } from "./routes/route.skill.js";
 import relayConnection from "./model/model.relayConnection.js";
 
 
