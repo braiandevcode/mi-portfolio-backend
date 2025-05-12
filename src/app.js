@@ -66,7 +66,7 @@ app.use(
 
 setInterval(async ()=>{
   await relayConnection();
-}, 300000);
+}, 100000);
 
 
 //**USO DE RUTAS***//
