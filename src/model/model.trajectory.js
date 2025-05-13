@@ -1,7 +1,7 @@
 import DB_CONNECTION from "../config/db.config.js";
 
 export const getInfoTrajectoryeModel = async () => {
-    const conn = await DB_CONNECTION().getConnection();
+    const conn = await DB_CONNECTION.getConnection();
 
     try {
         const [rows] = await conn.query('SELECT COUNT(*) AS contador FROM trajectory');
