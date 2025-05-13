@@ -64,7 +64,7 @@ app.use(
 );
 
 app.get('/ping', async (req, res) => {
- await relayConnection();
+ await relayConnection(req, res);
 });
 
 
