@@ -9,7 +9,7 @@ const DB_CONNECTION = ()=>{
     port: process.env.MYSQLPORT,
     waitForConnections: true, // esperará si todas las conexiones están ocupadas
     connectionLimit: 10, // máximo 10 conexiones simultáneas
-    keepAliveInitialDelay: 10000, // Opcional: mantenerla activa
+    waitForConnections: true,
     queueLimit: 0, // sin límite de espera en cola
   })
 }

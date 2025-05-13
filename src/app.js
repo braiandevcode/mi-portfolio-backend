@@ -63,10 +63,9 @@ app.use(
   express.static(join(__dirname, "images", "uploads"))
 );
 
-
-setInterval(async ()=>{
-  await relayConnection();
-}, 100000);
+app.get('/ping', async (req, res) => {
+ await relayConnection();
+});
 
 
 //**USO DE RUTAS***//
